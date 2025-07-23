@@ -132,4 +132,4 @@ kind delete cluster --name my-cluster
 
 ---
 
-**Last Updated**: January 2025 
+**Last Updated**: January 2025 # Updated Git configuration
