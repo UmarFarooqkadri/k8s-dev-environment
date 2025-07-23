@@ -1,0 +1,51 @@
+# Kubernetes specific ignores
+*.kubeconfig
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Helm
+charts/*.tgz
+*.tgz
+
+# Kind cluster files
+kind-config.yaml
+kind-cluster-*
+
+# ArgoCD
+argocd-initial-admin-secret
+*.secret
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Local environment files
+.env
+.env.local
+
+# Backup files
+*.bak
+*.backup
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 

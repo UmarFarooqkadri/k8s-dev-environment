@@ -1,0 +1,135 @@
+# Custom ArgoCD Values File
+# This file contains common customizations for ArgoCD deployment
+
+# Server configuration
+server:
+  # Enable ingress for external access
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    hosts:
+      - host: argocd.local
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: argocd-server-tls
+        hosts:
+          - argocd.local
+
+  # Configure server settings
+  extraArgs:
+    - --insecure
+    - --rootpath
+    - /
+  
+  # Resource limits
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+# Application Controller configuration
+controller:
+  # Resource limits
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+# Repo Server configuration
+repoServer:
+  # Resource limits
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+# Redis configuration
+redis:
+  enabled: true
+  auth:
+    enabled: false
+
+# HA Redis configuration (alternative to single Redis)
+redis-ha:
+  enabled: false
+
+# Dex configuration (for SSO)
+dex:
+  enabled: false
+
+# Notifications configuration
+notifications:
+  enabled: true
+
+# High availability settings
+ha:
+  enabled: false
+
+# Security settings
+rbac:
+  create: true
+  pspEnabled: false
+
+# Service account configuration
+serviceAccount:
+  create: true
+  name: ""
+
+# Pod security context
+podSecurityContext:
+  fsGroup: 999
+  runAsNonRoot: true
+  runAsUser: 999
+
+# Container security context
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 999
+
+# Network policy
+networkPolicy:
+  enabled: false
+
+# Metrics configuration
+metrics:
+  enabled: true
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "8082"
+
+# Config management plugins
+configManagementPlugins: ""
+
+# Resource customizations
+resourceCustomizations: ""
+
+# Application set controller
+applicationSet:
+  enabled: true
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi 
